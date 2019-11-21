@@ -19,6 +19,10 @@ class ReceiveWriteActivity : BaseActivity<ActivityReceiveWriteBinding>() {
         super.onCreate(savedInstanceState)
 
         binding.handler = this
+
+        binding.appBar.btnBack.setOnClickListener {
+            finish()
+        }
     }
 
     fun onClickButton(view: View) {

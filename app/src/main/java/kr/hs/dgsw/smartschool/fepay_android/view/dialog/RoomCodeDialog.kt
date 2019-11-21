@@ -1,6 +1,7 @@
 package kr.hs.dgsw.smartschool.fepay_android.view.dialog
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.FragmentManager
 import io.reactivex.observers.DisposableSingleObserver
 import kr.hs.dgsw.smartschool.fepay_android.R
@@ -19,9 +20,8 @@ class RoomCodeDialog(val token: String) : BaseDialog<DialogRoomCodeBinding>() {
     private val service: UserService
             = Utils.RETROFIT.create(UserService::class.java)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.btnWrite.setOnClickListener {
             addDisposable(service.
                 join(
@@ -34,7 +34,7 @@ class RoomCodeDialog(val token: String) : BaseDialog<DialogRoomCodeBinding>() {
                     }
 
                     override fun onError(e: Throwable) {
-                        simpleToast("로그인 실패")
+                        simpleToast(e.message)
                     }
                 })
         }
