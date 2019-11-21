@@ -3,6 +3,7 @@ package kr.hs.dgsw.smartschool.fepay_android.view
 import android.os.Bundle
 import io.reactivex.observers.DisposableSingleObserver
 import kr.hs.dgsw.smartschool.fepay_android.R
+import kr.hs.dgsw.smartschool.fepay_android.base.BaseActivity
 import kr.hs.dgsw.smartschool.fepay_android.databinding.ActivitySignupBinding
 import kr.hs.dgsw.smartschool.fepay_android.network.request.SignUpRequest
 import kr.hs.dgsw.smartschool.fepay_android.network.service.UserService

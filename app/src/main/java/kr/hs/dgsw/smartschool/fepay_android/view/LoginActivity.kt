@@ -1,17 +1,15 @@
 package kr.hs.dgsw.smartschool.fepay_android.view
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import io.reactivex.observers.DisposableSingleObserver
 import kr.hs.dgsw.smartschool.fepay_android.R
+import kr.hs.dgsw.smartschool.fepay_android.base.BaseActivity
 import kr.hs.dgsw.smartschool.fepay_android.database.TokenManager
 import kr.hs.dgsw.smartschool.fepay_android.databinding.ActivityLoginBinding
 import kr.hs.dgsw.smartschool.fepay_android.network.request.LoginRequest
-import kr.hs.dgsw.smartschool.fepay_android.network.request.SignUpRequest
 import kr.hs.dgsw.smartschool.fepay_android.network.response.LoginResponse
 import kr.hs.dgsw.smartschool.fepay_android.network.service.UserService
 import kr.hs.dgsw.smartschool.fepay_android.util.Utils
-import java.util.*
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 

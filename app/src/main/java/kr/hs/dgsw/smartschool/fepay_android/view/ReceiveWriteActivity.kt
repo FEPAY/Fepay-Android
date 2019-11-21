@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
 import kr.hs.dgsw.smartschool.fepay_android.R
+import kr.hs.dgsw.smartschool.fepay_android.base.BaseActivity
 import kr.hs.dgsw.smartschool.fepay_android.databinding.ActivityReceiveWriteBinding
 
 class ReceiveWriteActivity : BaseActivity<ActivityReceiveWriteBinding>() {
