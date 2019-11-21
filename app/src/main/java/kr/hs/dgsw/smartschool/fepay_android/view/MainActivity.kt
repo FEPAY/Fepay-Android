@@ -1,7 +1,8 @@
-package kr.hs.dgsw.smartschool.fepay_android
+package kr.hs.dgsw.smartschool.fepay_android.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import kr.hs.dgsw.smartschool.fepay_android.R
 
 class MainActivity : AppCompatActivity() {
 
