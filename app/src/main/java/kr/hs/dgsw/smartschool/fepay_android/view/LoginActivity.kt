@@ -35,5 +35,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                 override fun onError(e: Throwable) { }
             })
         }
+
+        binding.btnRegister.setOnClickListener {
+            startActivity(SignUpActivity::class.java)
+        }
     }
 }

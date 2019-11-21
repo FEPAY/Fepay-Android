@@ -46,29 +46,6 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
         disposable.dispose()
     }
 
-    override fun setRequestedOrientation(requestedOrientation: Int) {
-        if (VERSION.SDK_INT != VERSION_CODES.O) {
-            super.setRequestedOrientation(requestedOrientation)
-        }
-    }
-    /**
-     * 네비게이션 바를 밝음(버튼 어둡게)으로 설정
-     */
-    protected fun lightNavMode() {
-        var flags = window.decorView.systemUiVisibility
-        val mode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        /*
-            버전이 Oreo 미만 또는
-            야간 모드일때, 네비바를 밝게 설정하지 않음
-         */
-
-        if (mode != Configuration.UI_MODE_NIGHT_YES) if (VERSION.SDK_INT >= VERSION_CODES.O) {
-            flags = flags or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-            window.decorView.systemUiVisibility = flags
-            window.navigationBarColor = Color.WHITE
-        } else window.setFlags(LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
-    }
-
     protected fun startActivity(activity: Class<*>) {
         startActivity(Intent(this, activity).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
     }

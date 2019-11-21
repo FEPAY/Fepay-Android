@@ -20,7 +20,8 @@
         <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.MainActivity" />
         <activity android:name=".view.SignUpActivity" />
-        <activity android:name=".view.ReceiveWriteActivity">
+        <activity android:name=".view.ReceiveWriteActivity" />
+        <activity android:name=".view.SuccessActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

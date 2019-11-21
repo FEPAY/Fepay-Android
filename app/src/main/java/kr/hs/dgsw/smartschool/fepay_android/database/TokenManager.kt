@@ -11,7 +11,7 @@ class TokenManager(context: Context) : ContextWrapper(context) {
     var token: String = ""
         @SuppressLint("CheckResult")
         get() {
-            val sharedPreferences: SharedPreferences = getSharedPreferences("weknot", Context.MODE_PRIVATE)
+            val sharedPreferences: SharedPreferences = getSharedPreferences("fepay", Context.MODE_PRIVATE)
             val rxPreferences = RxSharedPreferences.create(sharedPreferences)
             val tokenObservable: Preference<String> = rxPreferences.getString("token")
             tokenObservable.asObservable().subscribe { token: String -> field = token }
@@ -19,7 +19,7 @@ class TokenManager(context: Context) : ContextWrapper(context) {
         }
         @SuppressLint("ApplySharedPref")
         set(token) {
-            val sharedPreferences: SharedPreferences = getSharedPreferences("weknot", Context.MODE_PRIVATE)
+            val sharedPreferences: SharedPreferences = getSharedPreferences("fepay", Context.MODE_PRIVATE)
             val editor: SharedPreferences.Editor = sharedPreferences.edit()
             editor.putString("token", token)
             editor.commit()

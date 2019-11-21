@@ -44,6 +44,8 @@ dependencies {
     implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$rootProject.rxRetrofitAdapterVersion"
     implementation "com.f2prateek.rx.preferences2:rx-preferences:$rootProject.rxPreferencesVersion"
 
+    implementation "com.airbnb.android:lottie:$rootProject.lottieVersion"
+
     implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
     implementation "com.google.android.material:material:$rootProject.materialVersion"
     implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"

@@ -25,7 +25,7 @@ class SignUpActivity : BaseActivity<ActivitySignupBinding>() {
             addDisposable(service.
                 signUp(SignUpRequest(binding.inputId.text.toString(),binding.inputName.text.toString(),
                     binding.inputPhone.text.toString(), binding.inputPassword.text.toString(), Date().toString()
-                )).map { it.body() }, object : DisposableSingleObserver<String>() {
+                )).map { it.message() }, object : DisposableSingleObserver<String>() {
                 override fun onSuccess(t: String) {
                     startActivitiesWithFinish(LoginActivity::class.java)
                 }
