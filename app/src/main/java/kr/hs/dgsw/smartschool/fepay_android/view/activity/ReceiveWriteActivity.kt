@@ -23,6 +23,10 @@ class ReceiveWriteActivity : BaseActivity<ActivityReceiveWriteBinding>() {
         binding.appBar.btnBack.setOnClickListener {
             finish()
         }
+
+        binding.btnPay.setOnClickListener {
+
+        }
     }
 
     fun onClickButton(view: View) {

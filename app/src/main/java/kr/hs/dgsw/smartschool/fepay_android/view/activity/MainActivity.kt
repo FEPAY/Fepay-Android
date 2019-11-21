@@ -7,7 +7,7 @@ import kr.hs.dgsw.smartschool.fepay_android.R
 import kr.hs.dgsw.smartschool.fepay_android.base.BaseActivity
 import kr.hs.dgsw.smartschool.fepay_android.database.TokenManager
 import kr.hs.dgsw.smartschool.fepay_android.databinding.ActivityMainBinding
-import kr.hs.dgsw.smartschool.fepay_android.network.response.BalanceResponse
+import kr.hs.dgsw.smartschool.fepay_android.network.response.MyInfoResponse
 import kr.hs.dgsw.smartschool.fepay_android.network.service.UserService
 import kr.hs.dgsw.smartschool.fepay_android.util.Utils
 
@@ -23,16 +23,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         super.onCreate(savedInstanceState)
 
         addDisposable(service.
-            getBalance(TokenManager(this).token).map {  if (it.isSuccessful) it.body() else throw Exception(it.errorBody().toString()) },
-                object : DisposableSingleObserver<BalanceResponse>() {
+            getMyInfo(TokenManager(this).token).map {  if (it.isSuccessful) it.body() else throw Exception(it.errorBody().toString()) },
+                object : DisposableSingleObserver<MyInfoResponse>() {
                     @SuppressLint("SetTextI18n")
-                    override fun onSuccess(t: BalanceResponse) {
+                    override fun onSuccess(t: MyInfoResponse) {
                         binding.balanceText.text = t.balance + "원"
                     }
 
-                    override fun onError(e: Throwable) {
-
-                    }
+                    override fun onError(e: Throwable) { }
                 })
 
         binding.btnSell.setOnClickListener {

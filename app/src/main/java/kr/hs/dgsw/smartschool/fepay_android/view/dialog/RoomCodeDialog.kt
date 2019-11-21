@@ -25,7 +25,7 @@ class RoomCodeDialog(val token: String) : BaseDialog<DialogRoomCodeBinding>() {
         binding.btnWrite.setOnClickListener {
             addDisposable(service.
                 join(
-                    token, Integer.parseInt(binding.inputId.text.toString())
+                    token, binding.inputId.text.toString()
                 ).map { if (it.isSuccessful) it.message() else throw Exception("코드 오류") },
                 object : DisposableSingleObserver<String>() {
                     override fun onSuccess(t: String) {

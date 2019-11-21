@@ -16,18 +16,17 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".view.activity.SplashActivity">
-        </activity>
-        <activity android:name=".view.activity.LoginActivity" />
-        <activity android:name=".view.activity.MainActivity" />
-        <activity android:name=".view.activity.SignUpActivity" />
-        <activity android:name=".view.activity.ReceiveWriteActivity" />
-        <activity android:name=".view.activity.SuccessActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.activity.LoginActivity" />
+        <activity android:name=".view.activity.MainActivity" />
+        <activity android:name=".view.activity.SignUpActivity" />
+        <activity android:name=".view.activity.ReceiveWriteActivity" />
+        <activity android:name=".view.activity.SuccessActivity" />
     </application>
 
 </manifest>

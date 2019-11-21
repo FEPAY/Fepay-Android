@@ -1,4 +1,4 @@
-package kr.hs.dgsw.smartschool.dodamdodam_teacher.widget.extension
+package kr.hs.dgsw.smartschool.fepay_android.widget.extension
 
 import android.content.ContextWrapper
 import android.view.View

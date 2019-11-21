@@ -65,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nanum_square_round"
                         android:textSize="40sp"
-                        tools:text="0원"
+                        android:text="0원"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
