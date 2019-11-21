@@ -1,4 +1,4 @@
-package kr.hs.dgsw.smartschool.fepay_android.view
+package kr.hs.dgsw.smartschool.fepay_android.view.activity
 
 import android.os.Bundle
 import android.view.View

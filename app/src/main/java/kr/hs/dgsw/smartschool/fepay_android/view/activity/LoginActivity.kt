@@ -1,4 +1,4 @@
-package kr.hs.dgsw.smartschool.fepay_android.view
+package kr.hs.dgsw.smartschool.fepay_android.view.activity
 
 import android.os.Bundle
 import io.reactivex.observers.DisposableSingleObserver
@@ -10,6 +10,7 @@ import kr.hs.dgsw.smartschool.fepay_android.network.request.LoginRequest
 import kr.hs.dgsw.smartschool.fepay_android.network.response.LoginResponse
 import kr.hs.dgsw.smartschool.fepay_android.network.service.UserService
 import kr.hs.dgsw.smartschool.fepay_android.util.Utils
+import kr.hs.dgsw.smartschool.fepay_android.view.dialog.RoomCodeDialog
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
@@ -26,14 +27,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             addDisposable(service.
                 login(
                     LoginRequest(binding.inputId.text.toString(), binding.inputPassword.text.toString())
-                ).map { it.body() }, object : DisposableSingleObserver<LoginResponse>() {
-                override fun onSuccess(t: LoginResponse) {
-                    TokenManager(this@LoginActivity).token = t.access
-                    startActivitiesWithFinish(MainActivity::class.java)
-                }
+                ).map { if (it.isSuccessful) it.body() else throw Exception("로그인 실패") },
+                object : DisposableSingleObserver<LoginResponse>() {
+                    override fun onSuccess(t: LoginResponse) {
+                        RoomCodeDialog(t.access).show(supportFragmentManager)
+                    }
 
-                override fun onError(e: Throwable) { }
-            })
+                    override fun onError(e: Throwable) {
+                        simpleToast(e.message)
+                    }
+                })
         }
 
         binding.btnRegister.setOnClickListener {

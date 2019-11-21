@@ -1,4 +1,4 @@
-package kr.hs.dgsw.smartschool.fepay_android.view
+package kr.hs.dgsw.smartschool.fepay_android.view.activity
 
 import android.os.Bundle
 import io.reactivex.observers.DisposableSingleObserver
@@ -23,14 +23,19 @@ class SignUpActivity : BaseActivity<ActivitySignupBinding>() {
 
         binding.btnSignup.setOnClickListener {
             addDisposable(service.
-                signUp(SignUpRequest(binding.inputId.text.toString(),binding.inputName.text.toString(),
-                    binding.inputPhone.text.toString(), binding.inputPassword.text.toString(), Date().toString()
-                )).map { it.message() }, object : DisposableSingleObserver<String>() {
-                override fun onSuccess(t: String) {
-                    startActivitiesWithFinish(LoginActivity::class.java)
-                }
+                signUp(SignUpRequest(binding.inputId.text.toString(), binding.inputPassword.text.toString(),
+                    binding.inputName.text.toString(), binding.inputPhone.text.toString(), Date().toString()
+                )).map {
+                if (it.code() == 200) return@map it.message()
+                else throw Exception(it.errorBody().toString()) },
+                object : DisposableSingleObserver<String>() {
+                    override fun onSuccess(t: String) {
+                        startActivitiesWithFinish(LoginActivity::class.java)
+                    }
 
-                override fun onError(e: Throwable) { }
+                    override fun onError(e: Throwable) {
+                        simpleToast(e.message)
+                    }
             })
         }
     }

@@ -1,7 +1,6 @@
-package kr.hs.dgsw.smartschool.fepay_android.view
+package kr.hs.dgsw.smartschool.fepay_android.view.activity
 
 import android.os.Bundle
-import com.airbnb.lottie.LottieDrawable
 import kr.hs.dgsw.smartschool.fepay_android.R
 import kr.hs.dgsw.smartschool.fepay_android.base.BaseActivity
 import kr.hs.dgsw.smartschool.fepay_android.databinding.ActivitySuccessBinding

@@ -19,6 +19,8 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import org.json.JSONObject
+import retrofit2.Response
 import java.util.*
 
 abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
@@ -38,6 +40,18 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
         disposable.add(single.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread()).subscribeWith(observer as SingleObserver<Any>) as Disposable
         )
+    }
+
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+    protected fun checkError(response: Response<*>) {
+        if (!response.isSuccessful) {
+            val errorBody = JSONObject(
+                Objects
+                    .requireNonNull(
+                        response.errorBody())?.string()
+            )
+            throw Exception(errorBody.getString("message"))
+        }
     }
 
     override fun onDestroy() {
