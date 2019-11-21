@@ -22,7 +22,7 @@ class SignUpActivity : BaseActivity<ActivitySignupBinding>() {
 
         binding.btnSignup.setOnClickListener {
             addDisposable(service.
-                signUp(SignUpRequest(binding.inputEmail.text.toString(),binding.inputName.text.toString(),
+                signUp(SignUpRequest(binding.inputId.text.toString(),binding.inputName.text.toString(),
                     binding.inputPhone.text.toString(), binding.inputPassword.text.toString(), Date().toString()
                 )).map { it.body() }, object : DisposableSingleObserver<String>() {
                 override fun onSuccess(t: String) {

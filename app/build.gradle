@@ -42,6 +42,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroidVersion"
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxVersion"
     implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$rootProject.rxRetrofitAdapterVersion"
+    implementation "com.f2prateek.rx.preferences2:rx-preferences:$rootProject.rxPreferencesVersion"
 
     implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
     implementation "com.google.android.material:material:$rootProject.materialVersion"

@@ -34,7 +34,7 @@
                 android:orientation="vertical" >
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/input_layout_email"
+                    android:id="@+id/input_layout_id"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -42,14 +42,14 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:hint="Email" >
+                    android:hint="ID" >
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/input_email"
+                        android:id="@+id/input_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:imeOptions="flagNoExtractUi|flagNoFullscreen|flagNoAccessoryAction"
-                        android:inputType="textEmailAddress"
+                        android:inputType="text"
                         android:privateImeOptions="nm" />
 
                 </com.google.android.material.textfield.TextInputLayout>
