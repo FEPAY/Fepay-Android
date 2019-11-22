@@ -29,8 +29,8 @@ interface UserService {
     @POST("pay")
     fun postPay(@Header("Authorization") token: String, @Body body: Any?): Flowable<Response<Unit>>
 
-    @PATCH("pay")
-    fun acceptPay(@Header("Authorization") token: String, @Body body: Any?): Flowable<Response<GetUserInfoResponse>>
+    @PATCH("pay/")
+    fun acceptPay(@Header("Authorization") token: String, @Query("recipient_id") id: String): Flowable<Response<GetUserInfoResponse>>
 
     @PATCH("user/join")
     fun join(

@@ -40,8 +40,7 @@ class SendActivity: AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
 
-        compositeDisposable.add(service.acceptPay(TokenManager(this).token,
-            AcceptPayRequest(result.contents)).subscribeOn(Schedulers.io())
+        compositeDisposable.add(service.acceptPay(TokenManager(this).token, result.contents).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread()).subscribe({ response ->
             when(response.code()) {
                 200 -> {
@@ -81,5 +80,10 @@ class SendActivity: AppCompatActivity() {
                 intentIntegrator.initiateScan()
             }
         }))
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.clear()
     }
 }
