@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="kr.hs.dgsw.smartschool.fepay_android" >
 
-    <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.hardware.camera" />
+    <uses-permission android:name="android.hardware.camera.autofocus" />
   
     <application
         android:allowBackup="true"
@@ -15,6 +17,7 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
         <activity android:name=".view.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,11 +25,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".view.activity.LoginActivity" />
         <activity android:name=".view.activity.MainActivity" />
         <activity android:name=".view.activity.SignUpActivity" />
         <activity android:name=".view.activity.ReceiveWriteActivity" />
+        <activity android:name=".view.SendActivity"/>
         <activity android:name=".view.activity.SuccessActivity" />
+        <activity android:name=".view.CreateQrCodeActivity"/>
+        <activity android:name=".view.ScanQrCodeActivity"/>
     </application>
 
 </manifest>
