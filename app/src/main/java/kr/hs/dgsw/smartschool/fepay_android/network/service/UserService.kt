@@ -20,10 +20,10 @@ interface UserService {
         @Body request: LoginRequest
     ): Single<Response<LoginResponse>>
 
-    @PATCH("user/join/{festival_id}")
+    @PATCH("user/join")
     fun join(
         @Header("Authorization") token: String,
-        @Path("festival_id") festival_id: String
+        @Query("festival_id") festival_id: String
     ): Single<Response<Any>>
 
     @GET("user/me")
