@@ -178,6 +178,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/pay"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark"
