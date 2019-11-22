@@ -23,6 +23,10 @@ class RoomCodeDialog(val token: String) : BaseDialog<DialogRoomCodeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnWrite.setOnClickListener {
+            if (binding.inputId.text.toString() != "826314") {
+                simpleToast("코드가 존재하지 않습니다.")
+                return@setOnClickListener
+            }
             addDisposable(service.
                 join(
                     token, binding.inputId.text.toString()
