@@ -13,6 +13,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_create_qr_code.*
+import kotlinx.android.synthetic.main.app_bar_basic.view.*
 import kr.hs.dgsw.smartschool.fepay_android.R
 import kr.hs.dgsw.smartschool.fepay_android.database.TokenManager
 import kr.hs.dgsw.smartschool.fepay_android.network.service.UserService
@@ -74,6 +75,10 @@ class CreateQrCodeActivity: AppCompatActivity() {
             }, {
                 Toast.makeText(applicationContext, "네트워크 상태를 확인해주세요.", Toast.LENGTH_SHORT).show()
             }))
+        }
+
+        app_bar.btn_back.setOnClickListener {
+            finish()
         }
     }
 

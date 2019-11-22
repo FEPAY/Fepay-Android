@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.journeyapps.barcodescanner.CaptureManager
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
 import kotlinx.android.synthetic.main.activity_reader_qr_code.*
+import kotlinx.android.synthetic.main.app_bar_basic.view.*
 import kr.hs.dgsw.smartschool.fepay_android.R
 
 
@@ -20,6 +21,10 @@ class ScanQrCodeActivity: AppCompatActivity(), DecoratedBarcodeView.TorchListene
         manager = CaptureManager(this, scan_qr)
         manager.initializeFromIntent(intent, savedInstanceState)
         manager.decode()
+
+        app_bar.btn_back.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onTorchOn() {

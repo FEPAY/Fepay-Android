@@ -8,6 +8,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_send.*
+import kotlinx.android.synthetic.main.app_bar_basic.view.*
 import kr.hs.dgsw.smartschool.fepay_android.R
 import kr.hs.dgsw.smartschool.fepay_android.database.TokenManager
 import kr.hs.dgsw.smartschool.fepay_android.network.request.AcceptPayRequest
@@ -29,6 +30,10 @@ class SendActivity: AppCompatActivity() {
         setContentView(R.layout.activity_send)
 
         result_tv.text = "처리 중 입니다"
+
+        app_bar.btn_back.setOnClickListener {
+            finish()
+        }
 
         val intentIntegrator = IntentIntegrator(this)
         intentIntegrator.setBeepEnabled(false)

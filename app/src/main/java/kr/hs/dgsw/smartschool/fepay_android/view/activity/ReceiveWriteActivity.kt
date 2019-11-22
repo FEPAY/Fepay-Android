@@ -11,6 +11,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_receive_write.*
+import kotlinx.android.synthetic.main.app_bar_basic.view.*
 import kr.hs.dgsw.smartschool.fepay_android.R
 import kr.hs.dgsw.smartschool.fepay_android.database.TokenManager
 import kr.hs.dgsw.smartschool.fepay_android.base.BaseActivity
@@ -54,6 +55,10 @@ class ReceiveWriteActivity : BaseActivity<ActivityReceiveWriteBinding>() {
             binding.appBar.btnBack.setOnClickListener {
                 finish()
             }
+        }
+
+        app_bar.btn_back.setOnClickListener {
+            finish()
         }
     }
 
