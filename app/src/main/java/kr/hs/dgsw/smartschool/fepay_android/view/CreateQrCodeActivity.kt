@@ -8,12 +8,16 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import com.journeyapps.barcodescanner.BarcodeEncoder
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_create_qr_code.*
 import kr.hs.dgsw.smartschool.fepay_android.R
 import kr.hs.dgsw.smartschool.fepay_android.database.TokenManager
 import kr.hs.dgsw.smartschool.fepay_android.network.service.UserService
 import kr.hs.dgsw.smartschool.fepay_android.util.Utils
+import kr.hs.dgsw.smartschool.fepay_android.view.activity.MainActivity
+import kr.hs.dgsw.smartschool.fepay_android.view.activity.SuccessActivity
 
 class CreateQrCodeActivity: AppCompatActivity() {
 
@@ -26,10 +30,10 @@ class CreateQrCodeActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_qr_code)
 
-        compositeDisposable.add(service.getUserInfo(TokenManager(this).token).subscribe ({ response ->
+        compositeDisposable.add(service.getUserInfo(TokenManager(this).token).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread()).subscribe ({ response ->
             when (response.code()) {
                 200 -> {
-                    Toast.makeText(applicationContext, "성공적으로 취소되었습니다.", Toast.LENGTH_SHORT).show()
                     createQrCode(response.body()!!.id)
                 }
             }
@@ -38,7 +42,7 @@ class CreateQrCodeActivity: AppCompatActivity() {
         }))
 
         check.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, SuccessActivity::class.java))
             finish()
         }
     }

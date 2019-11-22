@@ -6,8 +6,10 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_receive_write.*
 import kr.hs.dgsw.smartschool.fepay_android.R
 import kr.hs.dgsw.smartschool.fepay_android.database.TokenManager
@@ -16,6 +18,7 @@ import kr.hs.dgsw.smartschool.fepay_android.databinding.ActivityReceiveWriteBind
 import kr.hs.dgsw.smartschool.fepay_android.network.request.PostPayRequest
 import kr.hs.dgsw.smartschool.fepay_android.network.service.UserService
 import kr.hs.dgsw.smartschool.fepay_android.util.Utils
+import kr.hs.dgsw.smartschool.fepay_android.view.CreateQrCodeActivity
 
 class ReceiveWriteActivity : BaseActivity<ActivityReceiveWriteBinding>() {
 
@@ -35,21 +38,22 @@ class ReceiveWriteActivity : BaseActivity<ActivityReceiveWriteBinding>() {
         binding.handler = this
 
         pay.setOnClickListener {
-            compositeDisposable.add(service.postPay(TokenManager(this).token,
-                PostPayRequest(Integer.parseInt(num.value!!))).subscribe({ response ->
-                when(response.code()) {
+            compositeDisposable.add(service.postPay(
+                TokenManager(this).token,
+                PostPayRequest(Integer.parseInt(num.value!!))
+            ).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe({ response ->
+                when (response.code()) {
                     200 -> startActivity(Intent(this, CreateQrCodeActivity::class.java))
                 }
             }, {
                 Toast.makeText(this, "오류가 발생했습니다", Toast.LENGTH_SHORT).show()
-            }))
-            
-        binding.appBar.btnBack.setOnClickListener {
-            finish()
-        }
+            })
+            )
 
-        binding.btnPay.setOnClickListener {
-
+            binding.appBar.btnBack.setOnClickListener {
+                finish()
+            }
         }
     }
 

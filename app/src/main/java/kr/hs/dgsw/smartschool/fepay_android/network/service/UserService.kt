@@ -26,7 +26,7 @@ interface UserService {
     @GET("user/me")
     fun getUserInfo(@Header("Authorization") token: String): Flowable<Response<GetUserInfoResponse>>
 
-    @POST
+    @POST("pay")
     fun postPay(@Header("Authorization") token: String, @Body body: Any?): Flowable<Response<Unit>>
 
     @PATCH("pay")

@@ -4,13 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.integration.android.IntentIntegrator
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_send.*
 import kr.hs.dgsw.smartschool.fepay_android.R
 import kr.hs.dgsw.smartschool.fepay_android.database.TokenManager
 import kr.hs.dgsw.smartschool.fepay_android.network.request.AcceptPayRequest
 import kr.hs.dgsw.smartschool.fepay_android.network.service.UserService
 import kr.hs.dgsw.smartschool.fepay_android.util.Utils
+import kr.hs.dgsw.smartschool.fepay_android.view.activity.MainActivity
+import kr.hs.dgsw.smartschool.fepay_android.view.activity.SuccessActivity
 
 
 class SendActivity: AppCompatActivity() {
@@ -37,13 +41,15 @@ class SendActivity: AppCompatActivity() {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
 
         compositeDisposable.add(service.acceptPay(TokenManager(this).token,
-            AcceptPayRequest(result.contents)).subscribe({ response ->
+            AcceptPayRequest(result.contents)).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread()).subscribe({ response ->
             when(response.code()) {
                 200 -> {
                     result_tv.text = "송금 완료되었습니다"
                     check.text = "확인"
                     check.setOnClickListener {
-                        startActivity(Intent(this, MainActivity::class.java))
+                        startActivity(Intent(this, SuccessActivity::class.java))
+                        finish()
                     }
                 }
                 403 -> {
@@ -51,6 +57,7 @@ class SendActivity: AppCompatActivity() {
                     check.text = "확인"
                     check.setOnClickListener {
                         startActivity(Intent(this, MainActivity::class.java))
+                        finish()
                     }
                 }
                 500 -> {

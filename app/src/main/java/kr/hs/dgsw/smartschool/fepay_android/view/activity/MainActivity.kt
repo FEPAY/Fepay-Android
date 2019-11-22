@@ -10,6 +10,8 @@ import kr.hs.dgsw.smartschool.fepay_android.databinding.ActivityMainBinding
 import kr.hs.dgsw.smartschool.fepay_android.network.response.MyInfoResponse
 import kr.hs.dgsw.smartschool.fepay_android.network.service.UserService
 import kr.hs.dgsw.smartschool.fepay_android.util.Utils
+import kr.hs.dgsw.smartschool.fepay_android.view.ScanQrCodeActivity
+import kr.hs.dgsw.smartschool.fepay_android.view.SendActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
@@ -35,6 +37,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
         binding.btnSell.setOnClickListener {
             startActivity(ReceiveWriteActivity::class.java)
+        }
+
+        binding.btnPay.setOnClickListener {
+            startActivity(SendActivity::class.java)
         }
 
         binding.appBar.btnLogout.setOnClickListener {
