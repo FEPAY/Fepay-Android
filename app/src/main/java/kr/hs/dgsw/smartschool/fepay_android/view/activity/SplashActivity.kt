@@ -15,6 +15,8 @@ class SplashActivity : AppCompatActivity() {
         Runnable { startActivity(Intent(this, LoginActivity::class.java)) }
     private val runnableMain =
         Runnable { startActivity(Intent(this, MainActivity::class.java)) }
+    private val runnableFinish =
+        Runnable { finish() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,9 +24,10 @@ class SplashActivity : AppCompatActivity() {
 
         val isEmpty = TokenManager(this).token == ""
         if (isEmpty) {
-            handler.postDelayed(runnableLogin, 3000)
+            handler.postDelayed(runnableLogin, 2000)
         } else {
-            handler.postDelayed(runnableMain, 3000)
+            handler.postDelayed(runnableMain, 2000)
         }
+        handler.postDelayed(runnableFinish, 3000)
     }
 }
