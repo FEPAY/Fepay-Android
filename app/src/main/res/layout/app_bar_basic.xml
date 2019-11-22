@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:stateListAnimator="@null"
-        android:background="@drawable/background_under_line"
+        android:background="@android:color/white"
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -17,31 +17,11 @@
                 android:layout_height="match_parent"
                 android:gravity="start">
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/app_logo_large" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/gotham_bold"
-                    android:layout_marginStart="10dp"
-                    android:text="FEPAY"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/black"
-                    android:layout_gravity="center"
-                    android:textSize="22sp" />
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-                <ImageView
-                    android:id="@+id/btn_logout"
+                    android:id="@+id/btn_back"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="15dp"
-                    android:src="@drawable/ic_logout"/>
+                    android:src="@drawable/ic_back" />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>

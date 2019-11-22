@@ -1,11 +1,6 @@
-package kr.hs.dgsw.smartschool.fepay_android.view
+package kr.hs.dgsw.smartschool.fepay_android.base
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.ActivityManager
-import android.content.Context
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Build.VERSION
@@ -14,7 +9,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager.LayoutParams
 import android.widget.Toast
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -25,7 +19,8 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
-import java.lang.reflect.InvocationTargetException
+import org.json.JSONObject
+import retrofit2.Response
 import java.util.*
 
 abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
@@ -47,33 +42,22 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
         )
     }
 
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+    protected fun checkError(response: Response<*>) {
+        if (!response.isSuccessful) {
+            val errorBody = JSONObject(
+                Objects
+                    .requireNonNull(
+                        response.errorBody())?.string()
+            )
+            throw Exception(errorBody.getString("message"))
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         if(::binding.isInitialized) binding.unbind()
         disposable.dispose()
-    }
-
-    override fun setRequestedOrientation(requestedOrientation: Int) {
-        if (VERSION.SDK_INT != VERSION_CODES.O) {
-            super.setRequestedOrientation(requestedOrientation)
-        }
-    }
-    /**
-     * 네비게이션 바를 밝음(버튼 어둡게)으로 설정
-     */
-    protected fun lightNavMode() {
-        var flags = window.decorView.systemUiVisibility
-        val mode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        /*
-            버전이 Oreo 미만 또는
-            야간 모드일때, 네비바를 밝게 설정하지 않음
-         */
-
-        if (mode != Configuration.UI_MODE_NIGHT_YES) if (VERSION.SDK_INT >= VERSION_CODES.O) {
-            flags = flags or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-            window.decorView.systemUiVisibility = flags
-            window.navigationBarColor = Color.WHITE
-        } else window.setFlags(LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
     }
 
     protected fun startActivity(activity: Class<*>) {
