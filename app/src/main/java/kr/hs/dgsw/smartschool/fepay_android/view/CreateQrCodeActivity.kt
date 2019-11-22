@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
@@ -26,11 +27,25 @@ class CreateQrCodeActivity: AppCompatActivity() {
 
     private val compositeDisposable = CompositeDisposable()
 
+    private val beforeData = MutableLiveData<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_qr_code)
 
-        compositeDisposable.add(service.getUserInfo(TokenManager(this).token).subscribeOn(Schedulers.io())
+        compositeDisposable.add(service.getUserInfo(TokenManager(this).token)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ response ->
+            when(response.code()) {
+                200 -> beforeData.value = response.body()!!.balance
+            }
+        }, {
+            Toast.makeText(applicationContext, "네트워크 상태를 확인해주세요.", Toast.LENGTH_SHORT).show()
+        }))
+
+        compositeDisposable.add(service.getUserInfo(TokenManager(this).token)
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread()).subscribe ({ response ->
             when (response.code()) {
                 200 -> {
@@ -42,8 +57,23 @@ class CreateQrCodeActivity: AppCompatActivity() {
         }))
 
         check.setOnClickListener {
-            startActivity(Intent(this, SuccessActivity::class.java))
-            finish()
+            compositeDisposable.add(service.getUserInfo(TokenManager(this).token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ response ->
+                when(response.code()) {
+                    200 -> {
+                        if (beforeData.value!! != response.body()!!.balance){
+                            startActivity(Intent(this, SuccessActivity::class.java))
+                            finish()
+                        } else {
+                            Toast.makeText(applicationContext, "아직 결제가 완료되지 않았습니다.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }, {
+                Toast.makeText(applicationContext, "네트워크 상태를 확인해주세요.", Toast.LENGTH_SHORT).show()
+            }))
         }
     }
 

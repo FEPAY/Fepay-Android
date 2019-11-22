@@ -24,17 +24,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        addDisposable(service.
-            getMyInfo(TokenManager(this).token).map {  if (it.isSuccessful) it.body() else throw Exception(it.errorBody().toString()) },
-                object : DisposableSingleObserver<MyInfoResponse>() {
-                    @SuppressLint("SetTextI18n")
-                    override fun onSuccess(t: MyInfoResponse) {
-                        binding.balanceText.text = t.balance + "원"
-                    }
-
-                    override fun onError(e: Throwable) { }
-                })
-
         binding.btnSell.setOnClickListener {
             startActivity(ReceiveWriteActivity::class.java)
         }
@@ -47,5 +36,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             TokenManager(this).token = ""
             startActivitiesWithFinish(LoginActivity::class.java)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        addDisposable(service.
+            getMyInfo(TokenManager(this).token).map {  if (it.isSuccessful) it.body() else throw Exception(it.errorBody().toString()) },
+            object : DisposableSingleObserver<MyInfoResponse>() {
+                @SuppressLint("SetTextI18n")
+                override fun onSuccess(t: MyInfoResponse) {
+                    binding.balanceText.text = t.balance + "원"
+                }
+
+                override fun onError(e: Throwable) { }
+            })
     }
 }

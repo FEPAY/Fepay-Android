@@ -17,7 +17,7 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding>() {
         binding.lottie.repeatCount = 0
 
         binding.finishBtn.setOnClickListener {
-            startActivitiesWithFinish(MainActivity::class.java)
+            finish()
         }
     }
 }

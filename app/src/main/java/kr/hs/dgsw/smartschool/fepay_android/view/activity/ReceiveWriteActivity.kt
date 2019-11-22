@@ -44,7 +44,7 @@ class ReceiveWriteActivity : BaseActivity<ActivityReceiveWriteBinding>() {
             ).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe({ response ->
                 when (response.code()) {
-                    200 -> startActivity(Intent(this, CreateQrCodeActivity::class.java))
+                    200 -> startActivitiesWithFinish(CreateQrCodeActivity::class.java)
                 }
             }, {
                 Toast.makeText(this, "오류가 발생했습니다", Toast.LENGTH_SHORT).show()

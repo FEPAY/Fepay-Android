@@ -44,12 +44,8 @@ class SendActivity: AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread()).subscribe({ response ->
             when(response.code()) {
                 200 -> {
-                    result_tv.text = "송금 완료되었습니다"
-                    check.text = "확인"
-                    check.setOnClickListener {
-                        startActivity(Intent(this, SuccessActivity::class.java))
-                        finish()
-                    }
+                    startActivity(Intent(this, SuccessActivity::class.java))
+                    finish()
                 }
                 403 -> {
                     result_tv.text = "잔고가 부족합니다"

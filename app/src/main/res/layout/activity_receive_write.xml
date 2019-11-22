@@ -17,16 +17,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
-            android:gravity="center"
+            android:gravity="end"
             android:textSize="55sp"
+            android:layout_marginHorizontal="20dp"
+            android:maxLines="1"
+            android:maxLength="7"
             android:fontFamily="@font/nanum_square_round"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/won"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:mutableText="@{handler.num}"
             tools:text="0" />
 
         <TextView
+            android:id="@+id/won"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="원"
@@ -34,7 +38,7 @@
             android:layout_marginBottom="3dp"
             android:textSize="50sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView"
-            app:layout_constraintEnd_toEndOf="@+id/textView" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <LinearLayout
             android:layout_width="0dp"
